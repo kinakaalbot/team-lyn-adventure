@@ -1,6 +1,6 @@
-import { GameObject } from '../../common/types';
-import { Weapon } from '../../game-objects/weapons/base-weapon';
-import { BaseGameObjectComponent } from './base-game-object-component';
+import { GameObject } from "../../common/types";
+import { Weapon } from "../../game-objects/weapons/base-weapon";
+import { BaseGameObjectComponent } from "./base-game-object-component";
 
 export class WeaponComponent extends BaseGameObjectComponent {
   #weapon: Weapon | undefined;

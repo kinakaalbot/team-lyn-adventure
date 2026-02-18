@@ -1,8 +1,8 @@
-import * as Phaser from 'phaser';
-import { SwitchAction, TiledSwitchObject } from '../../common/tiled/types';
-import { CustomGameObject } from '../../common/types';
-import { SWITCH_TEXTURE } from '../../common/tiled/common';
-import { ASSET_KEYS, BUTTON_FRAME_KEYS } from '../../common/assets';
+import * as Phaser from "phaser";
+import { SwitchAction, TiledSwitchObject } from "../../common/tiled/types";
+import { CustomGameObject } from "../../common/types";
+import { SWITCH_TEXTURE } from "../../common/tiled/common";
+import { ASSET_KEYS, BUTTON_FRAME_KEYS } from "../../common/assets";
 
 type ButtonPressedEvent = {
   action: SwitchAction;
@@ -15,7 +15,9 @@ export class Button extends Phaser.Physics.Arcade.Image implements CustomGameObj
 
   constructor(scene: Phaser.Scene, config: TiledSwitchObject) {
     const frame =
-      config.texture === SWITCH_TEXTURE.FLOOR ? BUTTON_FRAME_KEYS.FLOOR_SWITCH : BUTTON_FRAME_KEYS.PLATE_SWITCH;
+      config.texture === SWITCH_TEXTURE.FLOOR
+        ? BUTTON_FRAME_KEYS.FLOOR_SWITCH
+        : BUTTON_FRAME_KEYS.PLATE_SWITCH;
     super(scene, config.x, config.y, ASSET_KEYS.DUNGEON_OBJECTS, frame);
 
     // add object to scene and enable phaser physics

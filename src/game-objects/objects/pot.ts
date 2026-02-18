@@ -1,10 +1,10 @@
-import * as Phaser from 'phaser';
-import { ASSET_KEYS } from '../../common/assets';
-import { CustomGameObject, Position } from '../../common/types';
-import { InteractiveObjectComponent } from '../../components/game-object/interactive-object-component';
-import { INTERACTIVE_OBJECT_TYPE } from '../../common/common';
-import { ThrowableObjectComponent } from '../../components/game-object/throwable-object-component';
-import { TiledPotObject } from '../../common/tiled/types';
+import * as Phaser from "phaser";
+import { ASSET_KEYS } from "../../common/assets";
+import { CustomGameObject, Position } from "../../common/types";
+import { InteractiveObjectComponent } from "../../components/game-object/interactive-object-component";
+import { INTERACTIVE_OBJECT_TYPE } from "../../common/common";
+import { ThrowableObjectComponent } from "../../components/game-object/throwable-object-component";
+import { TiledPotObject } from "../../common/tiled/types";
 
 export class Pot extends Phaser.Physics.Arcade.Sprite implements CustomGameObject {
   #position: Position;

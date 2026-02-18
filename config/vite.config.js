@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   base: "./",
@@ -6,7 +6,7 @@ export default defineConfig({
     chunkSizeWarningLimit: 1600,
     rollupOptions: {
       output: {
-        entryFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: "assets/js/[name]-[hash].js",
       },
     },
   },

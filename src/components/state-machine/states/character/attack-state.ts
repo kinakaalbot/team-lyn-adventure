@@ -1,9 +1,9 @@
-import { DIRECTION } from '../../../../common/common';
-import { exhaustiveGuard } from '../../../../common/utils';
-import { CharacterGameObject } from '../../../../game-objects/common/character-game-object';
-import { WeaponComponent } from '../../../game-object/weapon-component';
-import { BaseCharacterState } from './base-character-state';
-import { CHARACTER_STATES } from './character-states';
+import { DIRECTION } from "../../../../common/common";
+import { exhaustiveGuard } from "../../../../common/utils";
+import { CharacterGameObject } from "../../../../game-objects/common/character-game-object";
+import { WeaponComponent } from "../../../game-object/weapon-component";
+import { BaseCharacterState } from "./base-character-state";
+import { CHARACTER_STATES } from "./character-states";
 
 export class AttackState extends BaseCharacterState {
   constructor(gameObject: CharacterGameObject) {

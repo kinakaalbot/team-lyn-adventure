@@ -1,8 +1,8 @@
-import * as Phaser from 'phaser';
-import { SCENE_KEYS } from './scene-keys';
-import { ASSET_KEYS, ASSET_PACK_KEYS } from '../common/assets';
-import { LevelData } from '../common/types';
-import { DataManager } from '../common/data-manager';
+import * as Phaser from "phaser";
+import { SCENE_KEYS } from "./scene-keys";
+import { ASSET_KEYS, ASSET_PACK_KEYS } from "../common/assets";
+import { LevelData } from "../common/types";
+import { DataManager } from "../common/data-manager";
 
 export class PreloadScene extends Phaser.Scene {
   constructor() {
@@ -13,7 +13,7 @@ export class PreloadScene extends Phaser.Scene {
 
   public preload(): void {
     // load asset pack that has assets for the rest of the game
-    this.load.pack(ASSET_PACK_KEYS.MAIN, 'assets/data/assets.json');
+    this.load.pack(ASSET_PACK_KEYS.MAIN, "assets/data/assets.json");
   }
 
   public create(): void {

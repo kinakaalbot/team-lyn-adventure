@@ -1,9 +1,14 @@
-import * as Phaser from 'phaser';
-import { SCENE_KEYS } from './scene-keys';
-import { ASSET_KEYS, HEART_ANIMATIONS, HEART_TEXTURE_FRAME } from '../common/assets';
-import { DataManager } from '../common/data-manager';
-import { CUSTOM_EVENTS, EVENT_BUS, PLAYER_HEALTH_UPDATE_TYPE, PlayerHealthUpdated } from '../common/event-bus';
-import { DEFAULT_UI_TEXT_STYLE } from '../common/common';
+import * as Phaser from "phaser";
+import { SCENE_KEYS } from "./scene-keys";
+import { ASSET_KEYS, HEART_ANIMATIONS, HEART_TEXTURE_FRAME } from "../common/assets";
+import { DataManager } from "../common/data-manager";
+import {
+  CUSTOM_EVENTS,
+  EVENT_BUS,
+  PLAYER_HEALTH_UPDATE_TYPE,
+  PlayerHealthUpdated,
+} from "../common/event-bus";
+import { DEFAULT_UI_TEXT_STYLE } from "../common/common";
 
 export class UiScene extends Phaser.Scene {
   #hudContainer!: Phaser.GameObjects.Container;
@@ -45,8 +50,10 @@ export class UiScene extends Phaser.Scene {
     }
     this.#hudContainer.add(this.#hearts);
 
-    this.#dialogContainer = this.add.container(32, 142, [this.add.image(0, 0, ASSET_KEYS.UI_DIALOG, 0).setOrigin(0)]);
-    this.#dialogContainerText = this.add.text(14, 14, '', DEFAULT_UI_TEXT_STYLE).setOrigin(0);
+    this.#dialogContainer = this.add.container(32, 142, [
+      this.add.image(0, 0, ASSET_KEYS.UI_DIALOG, 0).setOrigin(0),
+    ]);
+    this.#dialogContainerText = this.add.text(14, 14, "", DEFAULT_UI_TEXT_STYLE).setOrigin(0);
     this.#dialogContainer.add(this.#dialogContainerText);
     this.#dialogContainer.visible = false;
 
@@ -79,9 +86,12 @@ export class UiScene extends Phaser.Scene {
       }
       await new Promise((resolve) => {
         this.#hearts[heartIndex].play(animationName);
-        this.#hearts[heartIndex].once(Phaser.Animations.Events.ANIMATION_COMPLETE_KEY + animationName, () => {
-          resolve(undefined);
-        });
+        this.#hearts[heartIndex].once(
+          Phaser.Animations.Events.ANIMATION_COMPLETE_KEY + animationName,
+          () => {
+            resolve(undefined);
+          },
+        );
       });
       health -= 1;
     }

@@ -1,5 +1,5 @@
-import * as Phaser from 'phaser';
-import { GameObject } from '../../common/types';
+import * as Phaser from "phaser";
+import { GameObject } from "../../common/types";
 
 export class BaseGameObjectComponent {
   protected scene: Phaser.Scene;

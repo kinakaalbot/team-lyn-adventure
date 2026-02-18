@@ -1,9 +1,9 @@
-import * as Phaser from 'phaser';
-import { Direction, Position } from '../../common/types';
-import { InputComponent } from '../../components/input/input-component';
-import { IdleState } from '../../components/state-machine/states/character/idle-state';
-import { CHARACTER_STATES } from '../../components/state-machine/states/character/character-states';
-import { MoveState } from '../../components/state-machine/states/character/move-state';
+import * as Phaser from "phaser";
+import { Direction, Position } from "../../common/types";
+import { InputComponent } from "../../components/input/input-component";
+import { IdleState } from "../../components/state-machine/states/character/idle-state";
+import { CHARACTER_STATES } from "../../components/state-machine/states/character/character-states";
+import { MoveState } from "../../components/state-machine/states/character/move-state";
 import {
   ENEMY_SPIDER_CHANGE_DIRECTION_DELAY_MAX,
   ENEMY_SPIDER_CHANGE_DIRECTION_DELAY_MIN,
@@ -11,14 +11,14 @@ import {
   ENEMY_SPIDER_HURT_PUSH_BACK_SPEED,
   ENEMY_SPIDER_MAX_HEALTH,
   ENEMY_SPIDER_SPEED,
-} from '../../common/config';
-import { AnimationConfig } from '../../components/game-object/animation-component';
-import { ASSET_KEYS, SPIDER_ANIMATION_KEYS } from '../../common/assets';
-import { CharacterGameObject } from '../common/character-game-object';
-import { DIRECTION } from '../../common/common';
-import { exhaustiveGuard } from '../../common/utils';
-import { HurtState } from '../../components/state-machine/states/character/hurt-state';
-import { DeathState } from '../../components/state-machine/states/character/death-state';
+} from "../../common/config";
+import { AnimationConfig } from "../../components/game-object/animation-component";
+import { ASSET_KEYS, SPIDER_ANIMATION_KEYS } from "../../common/assets";
+import { CharacterGameObject } from "../common/character-game-object";
+import { DIRECTION } from "../../common/common";
+import { exhaustiveGuard } from "../../common/utils";
+import { HurtState } from "../../components/state-machine/states/character/hurt-state";
+import { DeathState } from "../../components/state-machine/states/character/death-state";
 
 export type SpiderConfig = {
   scene: Phaser.Scene;
@@ -82,7 +82,10 @@ export class Spider extends CharacterGameObject {
 
     // start simple ai movement pattern
     this.scene.time.addEvent({
-      delay: Phaser.Math.Between(ENEMY_SPIDER_CHANGE_DIRECTION_DELAY_MIN, ENEMY_SPIDER_CHANGE_DIRECTION_DELAY_MAX),
+      delay: Phaser.Math.Between(
+        ENEMY_SPIDER_CHANGE_DIRECTION_DELAY_MIN,
+        ENEMY_SPIDER_CHANGE_DIRECTION_DELAY_MAX,
+      ),
       callback: this.#changeDirection,
       callbackScope: this,
       loop: false,
@@ -131,7 +134,10 @@ export class Spider extends CharacterGameObject {
 
       // set up event for next direction change
       this.scene.time.addEvent({
-        delay: Phaser.Math.Between(ENEMY_SPIDER_CHANGE_DIRECTION_DELAY_MIN, ENEMY_SPIDER_CHANGE_DIRECTION_DELAY_MAX),
+        delay: Phaser.Math.Between(
+          ENEMY_SPIDER_CHANGE_DIRECTION_DELAY_MIN,
+          ENEMY_SPIDER_CHANGE_DIRECTION_DELAY_MAX,
+        ),
         callback: this.#changeDirection,
         callbackScope: this,
         loop: false,

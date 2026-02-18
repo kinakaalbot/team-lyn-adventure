@@ -1,5 +1,5 @@
-import { Direction } from '../../common/types';
-import { WeaponComponent } from '../../components/game-object/weapon-component';
+import { Direction } from "../../common/types";
+import { WeaponComponent } from "../../components/game-object/weapon-component";
 
 export interface Weapon {
   baseDamage: number;

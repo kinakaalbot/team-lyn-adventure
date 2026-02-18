@@ -1,21 +1,28 @@
-import { DIRECTION } from '../../../../common/common';
-import { Direction } from '../../../../common/types';
-import { isArcadePhysicsBody } from '../../../../common/utils';
-import { CharacterGameObject } from '../../../../game-objects/common/character-game-object';
-import { InputComponent } from '../../../input/input-component';
-import { BaseCharacterState } from './base-character-state';
+import { DIRECTION } from "../../../../common/common";
+import { Direction } from "../../../../common/types";
+import { isArcadePhysicsBody } from "../../../../common/utils";
+import { CharacterGameObject } from "../../../../game-objects/common/character-game-object";
+import { InputComponent } from "../../../input/input-component";
+import { BaseCharacterState } from "./base-character-state";
 
 export abstract class BaseMoveState extends BaseCharacterState {
-  protected _moveAnimationPrefix: 'WALK' | 'WALK_HOLD';
+  protected _moveAnimationPrefix: "WALK" | "WALK_HOLD";
 
-  constructor(stateName: string, gameObject: CharacterGameObject, moveAnimationPrefix: 'WALK' | 'WALK_HOLD') {
+  constructor(
+    stateName: string,
+    gameObject: CharacterGameObject,
+    moveAnimationPrefix: "WALK" | "WALK_HOLD",
+  ) {
     super(stateName, gameObject);
     this._moveAnimationPrefix = moveAnimationPrefix;
   }
 
   protected isNoInputMovement(controls: InputComponent): boolean {
     return (
-      (!controls.isDownDown && !controls.isUpDown && !controls.isLeftDown && !controls.isRightDown) ||
+      (!controls.isDownDown &&
+        !controls.isUpDown &&
+        !controls.isLeftDown &&
+        !controls.isRightDown) ||
       controls.isMovementLocked
     );
   }
@@ -81,6 +88,8 @@ export abstract class BaseMoveState extends BaseCharacterState {
 
   protected updateDirection(direction: Direction): void {
     this._gameObject.direction = direction;
-    this._gameObject.animationComponent.playAnimation(`${this._moveAnimationPrefix}_${this._gameObject.direction}`);
+    this._gameObject.animationComponent.playAnimation(
+      `${this._moveAnimationPrefix}_${this._gameObject.direction}`,
+    );
   }
 }

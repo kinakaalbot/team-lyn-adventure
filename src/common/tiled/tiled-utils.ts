@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+import * as Phaser from "phaser";
 import {
   ChestReward,
   DoorType,
@@ -14,7 +14,7 @@ import {
   TiledRoomObject,
   TiledSwitchObject,
   TrapType,
-} from './types';
+} from "./types";
 import {
   CHEST_REWARD,
   DOOR_TYPE,
@@ -25,18 +25,22 @@ import {
   TILED_ROOM_OBJECT_PROPERTY,
   TILED_SWITCH_OBJECT_PROPERTY,
   TRAP_TYPE,
-} from './common';
-import { isDirection } from '../utils';
-import { LevelName } from '../types';
+} from "./common";
+import { isDirection } from "../utils";
+import { LevelName } from "../types";
 
 /**
  * Validates that the provided property is of the type TiledObjectProperty.
  */
 export function isTiledObjectProperty(property: unknown): property is TiledObjectProperty {
-  if (typeof property !== 'object' || property === null || property === undefined) {
+  if (typeof property !== "object" || property === null || property === undefined) {
     return false;
   }
-  return property['name'] !== undefined && property['type'] !== undefined && property['value'] !== undefined;
+  return (
+    property["name"] !== undefined &&
+    property["type"] !== undefined &&
+    property["value"] !== undefined
+  );
 }
 
 /**
@@ -44,7 +48,12 @@ export function isTiledObjectProperty(property: unknown): property is TiledObjec
  */
 export function getTiledProperties(properties: unknown): TiledObjectProperty[] {
   const validProperties: TiledObjectProperty[] = [];
-  if (typeof properties !== 'object' || properties === null || properties === undefined || !Array.isArray(properties)) {
+  if (
+    typeof properties !== "object" ||
+    properties === null ||
+    properties === undefined ||
+    !Array.isArray(properties)
+  ) {
     return validProperties;
   }
   properties.forEach((property) => {
@@ -60,7 +69,10 @@ export function getTiledProperties(properties: unknown): TiledObjectProperty[] {
  * Returns the value of the given Tiled property name on an object. In Tiled the object properties are
  * stored on an array, and we need to loop through the Array to find the property we are looking for.
  */
-export function getTiledPropertyByName<T>(properties: TiledObjectProperty[], propertyName: string): T | undefined {
+export function getTiledPropertyByName<T>(
+  properties: TiledObjectProperty[],
+  propertyName: string,
+): T | undefined {
   const tiledProperty = properties.find((prop) => {
     return prop.name === propertyName;
   });
@@ -74,7 +86,10 @@ export function getTiledPropertyByName<T>(properties: TiledObjectProperty[], pro
  * Finds all of the Tiled Objects for a given layer of a Tilemap, and filters to only objects that include
  * the basic properties for an objects position, width, and height.
  */
-export function getTiledObjectsFromLayer(map: Phaser.Tilemaps.Tilemap, layerName: string): TiledObjectWithProperties[] {
+export function getTiledObjectsFromLayer(
+  map: Phaser.Tilemaps.Tilemap,
+  layerName: string,
+): TiledObjectWithProperties[] {
   const validTiledObjects: TiledObjectWithProperties[] = [];
   // get the Tiled object layer by its name
   const tiledObjectLayer = map.getObjectLayer(layerName);
@@ -108,13 +123,19 @@ export function getTiledObjectsFromLayer(map: Phaser.Tilemaps.Tilemap, layerName
 /**
  * Finds all of the valid 'Room' Tiled Objects on a given layer of a Tilemap.
  */
-export function getTiledRoomObjectsFromMap(map: Phaser.Tilemaps.Tilemap, layerName: string): TiledRoomObject[] {
+export function getTiledRoomObjectsFromMap(
+  map: Phaser.Tilemaps.Tilemap,
+  layerName: string,
+): TiledRoomObject[] {
   const roomObjects: TiledRoomObject[] = [];
 
   // loop through each object and validate object has properties for the object we are planning to build
   const tiledObjects = getTiledObjectsFromLayer(map, layerName);
   tiledObjects.forEach((tiledObject) => {
-    const id = getTiledPropertyByName<number>(tiledObject.properties, TILED_ROOM_OBJECT_PROPERTY.ID);
+    const id = getTiledPropertyByName<number>(
+      tiledObject.properties,
+      TILED_ROOM_OBJECT_PROPERTY.ID,
+    );
     if (id === undefined) {
       return;
     }
@@ -140,7 +161,7 @@ export function getAllLayerNamesWithPrefix(map: Phaser.Tilemaps.Tilemap, prefix:
     .getObjectLayerNames()
     .filter((layerName) => layerName.startsWith(`${prefix}/`))
     .filter((layerName) => {
-      const layerData = layerName.split('/');
+      const layerData = layerName.split("/");
       if (layerData.length !== 3) {
         return false;
       }
@@ -151,19 +172,31 @@ export function getAllLayerNamesWithPrefix(map: Phaser.Tilemaps.Tilemap, prefix:
 /**
  * Finds all of the valid 'Door' Tiled Objects on a given layer of a Tilemap.
  */
-export function getTiledDoorObjectsFromMap(map: Phaser.Tilemaps.Tilemap, layerName: string): TiledDoorObject[] {
+export function getTiledDoorObjectsFromMap(
+  map: Phaser.Tilemaps.Tilemap,
+  layerName: string,
+): TiledDoorObject[] {
   const doorObjects: TiledDoorObject[] = [];
 
   // loop through each object and validate object has properties for the object we are planning to build
   const tiledObjects = getTiledObjectsFromLayer(map, layerName);
   tiledObjects.forEach((tiledObject) => {
-    const doorId = getTiledPropertyByName<number>(tiledObject.properties, TILED_DOOR_OBJECT_PROPERTY.ID);
+    const doorId = getTiledPropertyByName<number>(
+      tiledObject.properties,
+      TILED_DOOR_OBJECT_PROPERTY.ID,
+    );
     const targetDoorId = getTiledPropertyByName<number>(
       tiledObject.properties,
       TILED_DOOR_OBJECT_PROPERTY.TARGET_DOOR_ID,
     );
-    const doorDirection = getTiledPropertyByName<string>(tiledObject.properties, TILED_DOOR_OBJECT_PROPERTY.DIRECTION);
-    const doorType = getTiledPropertyByName<string>(tiledObject.properties, TILED_DOOR_OBJECT_PROPERTY.DOOR_TYPE);
+    const doorDirection = getTiledPropertyByName<string>(
+      tiledObject.properties,
+      TILED_DOOR_OBJECT_PROPERTY.DIRECTION,
+    );
+    const doorType = getTiledPropertyByName<string>(
+      tiledObject.properties,
+      TILED_DOOR_OBJECT_PROPERTY.DOOR_TYPE,
+    );
     const trapDoorType = getTiledPropertyByName<string>(
       tiledObject.properties,
       TILED_DOOR_OBJECT_PROPERTY.TRAP_DOOR_TRIGGER,
@@ -227,7 +260,10 @@ export function isTrapType(trapType: string): trapType is TrapType {
 /**
  * Finds all of the valid 'Pot' Tiled Objects on a given layer of a Tilemap.
  */
-export function getTiledPotObjectsFromMap(map: Phaser.Tilemaps.Tilemap, layerName: string): TiledPotObject[] {
+export function getTiledPotObjectsFromMap(
+  map: Phaser.Tilemaps.Tilemap,
+  layerName: string,
+): TiledPotObject[] {
   const potObjects: TiledPotObject[] = [];
 
   // loop through each object and validate object has properties for the object we are planning to build
@@ -247,14 +283,23 @@ export function getTiledPotObjectsFromMap(map: Phaser.Tilemaps.Tilemap, layerNam
 /**
  * Finds all of the valid 'Chest' Tiled Objects on a given layer of a Tilemap.
  */
-export function getTiledChestObjectsFromMap(map: Phaser.Tilemaps.Tilemap, layerName: string): TiledChestObject[] {
+export function getTiledChestObjectsFromMap(
+  map: Phaser.Tilemaps.Tilemap,
+  layerName: string,
+): TiledChestObject[] {
   const chestObjects: TiledChestObject[] = [];
 
   // loop through each object and validate object has properties for the object we are planning to build
   const tiledObjects = getTiledObjectsFromLayer(map, layerName);
   tiledObjects.forEach((tiledObject) => {
-    const contents = getTiledPropertyByName<ChestReward>(tiledObject.properties, TILED_CHEST_OBJECT_PROPERTY.CONTENTS);
-    const id = getTiledPropertyByName<number>(tiledObject.properties, TILED_CHEST_OBJECT_PROPERTY.ID);
+    const contents = getTiledPropertyByName<ChestReward>(
+      tiledObject.properties,
+      TILED_CHEST_OBJECT_PROPERTY.CONTENTS,
+    );
+    const id = getTiledPropertyByName<number>(
+      tiledObject.properties,
+      TILED_CHEST_OBJECT_PROPERTY.ID,
+    );
     const revealChestTrigger = getTiledPropertyByName<TrapType>(
       tiledObject.properties,
       TILED_CHEST_OBJECT_PROPERTY.REVEAL_CHEST_TRIGGER,
@@ -296,13 +341,19 @@ export function isChestReward(reward: string): reward is ChestReward {
 /**
  * Finds all of the valid 'Enemy' Tiled Objects on a given layer of a Tilemap.
  */
-export function getTiledEnemyObjectsFromMap(map: Phaser.Tilemaps.Tilemap, layerName: string): TiledEnemyObject[] {
+export function getTiledEnemyObjectsFromMap(
+  map: Phaser.Tilemaps.Tilemap,
+  layerName: string,
+): TiledEnemyObject[] {
   const enemyObjects: TiledEnemyObject[] = [];
 
   // loop through each object and validate object has properties for the object we are planning to build
   const tiledObjects = getTiledObjectsFromLayer(map, layerName);
   tiledObjects.forEach((tiledObject) => {
-    const enemyType = getTiledPropertyByName<number>(tiledObject.properties, TILED_ENEMY_OBJECT_PROPERTY.TYPE);
+    const enemyType = getTiledPropertyByName<number>(
+      tiledObject.properties,
+      TILED_ENEMY_OBJECT_PROPERTY.TYPE,
+    );
     if (enemyType === undefined) {
       return;
     }
@@ -322,15 +373,27 @@ export function getTiledEnemyObjectsFromMap(map: Phaser.Tilemaps.Tilemap, layerN
 /**
  * Finds all of the valid 'Switch' Tiled Objects on a given layer of a Tilemap.
  */
-export function getTiledSwitchObjectsFromMap(map: Phaser.Tilemaps.Tilemap, layerName: string): TiledSwitchObject[] {
+export function getTiledSwitchObjectsFromMap(
+  map: Phaser.Tilemaps.Tilemap,
+  layerName: string,
+): TiledSwitchObject[] {
   const switchObjects: TiledSwitchObject[] = [];
 
   // loop through each object and validate object has properties for the object we are planning to build
   const tiledObjects = getTiledObjectsFromLayer(map, layerName);
   tiledObjects.forEach((tiledObject) => {
-    const action = getTiledPropertyByName<string>(tiledObject.properties, TILED_SWITCH_OBJECT_PROPERTY.ACTION);
-    const targetIds = getTiledPropertyByName<string>(tiledObject.properties, TILED_SWITCH_OBJECT_PROPERTY.TARGET_IDS);
-    const texture = getTiledPropertyByName<string>(tiledObject.properties, TILED_SWITCH_OBJECT_PROPERTY.TEXTURE);
+    const action = getTiledPropertyByName<string>(
+      tiledObject.properties,
+      TILED_SWITCH_OBJECT_PROPERTY.ACTION,
+    );
+    const targetIds = getTiledPropertyByName<string>(
+      tiledObject.properties,
+      TILED_SWITCH_OBJECT_PROPERTY.TARGET_IDS,
+    );
+    const texture = getTiledPropertyByName<string>(
+      tiledObject.properties,
+      TILED_SWITCH_OBJECT_PROPERTY.TEXTURE,
+    );
 
     if (
       action === undefined ||
@@ -348,7 +411,7 @@ export function getTiledSwitchObjectsFromMap(map: Phaser.Tilemaps.Tilemap, layer
       width: tiledObject.width,
       height: tiledObject.height,
       action,
-      targetIds: targetIds.split(',').map((value) => parseInt(value, 10)),
+      targetIds: targetIds.split(",").map((value) => parseInt(value, 10)),
       texture,
     });
   });

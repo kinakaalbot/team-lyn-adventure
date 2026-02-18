@@ -1,6 +1,6 @@
-import { DIRECTION } from '../../common/common';
-import { Direction, GameObject } from '../../common/types';
-import { BaseGameObjectComponent } from './base-game-object-component';
+import { DIRECTION } from "../../common/common";
+import { Direction, GameObject } from "../../common/types";
+import { BaseGameObjectComponent } from "./base-game-object-component";
 
 export class DirectionComponent extends BaseGameObjectComponent {
   #direction: Direction;

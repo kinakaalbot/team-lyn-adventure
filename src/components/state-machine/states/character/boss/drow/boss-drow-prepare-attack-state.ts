@@ -1,10 +1,10 @@
-import * as Phaser from 'phaser';
-import { DIRECTION } from '../../../../../../common/common';
-import { CharacterGameObject } from '../../../../../../game-objects/common/character-game-object';
-import { GameScene } from '../../../../../../scenes/game-scene';
-import { BaseCharacterState } from '../../base-character-state';
-import { CHARACTER_STATES } from '../../character-states';
-import { ENEMY_BOSS_PREPARE_ATTACK_STATE_FINISHED_DELAY } from '../../../../../../common/config';
+import * as Phaser from "phaser";
+import { DIRECTION } from "../../../../../../common/common";
+import { CharacterGameObject } from "../../../../../../game-objects/common/character-game-object";
+import { GameScene } from "../../../../../../scenes/game-scene";
+import { BaseCharacterState } from "../../base-character-state";
+import { CHARACTER_STATES } from "../../character-states";
+import { ENEMY_BOSS_PREPARE_ATTACK_STATE_FINISHED_DELAY } from "../../../../../../common/config";
 
 export class BossDrowPrepareAttackState extends BaseCharacterState {
   constructor(gameObject: CharacterGameObject) {
@@ -14,7 +14,10 @@ export class BossDrowPrepareAttackState extends BaseCharacterState {
   public onEnter(): void {
     const targetEnemy = (this._gameObject.scene as GameScene).player;
 
-    const vec = new Phaser.Math.Vector2(targetEnemy.x - this._gameObject.x, targetEnemy.y - this._gameObject.y);
+    const vec = new Phaser.Math.Vector2(
+      targetEnemy.x - this._gameObject.x,
+      targetEnemy.y - this._gameObject.y,
+    );
     const radians = vec.angle();
     const degrees = Phaser.Math.RadToDeg(radians);
 
@@ -30,7 +33,10 @@ export class BossDrowPrepareAttackState extends BaseCharacterState {
       this._gameObject.direction = DIRECTION.RIGHT;
     }
 
-    if (this._gameObject.direction === DIRECTION.DOWN || this._gameObject.direction === DIRECTION.UP) {
+    if (
+      this._gameObject.direction === DIRECTION.DOWN ||
+      this._gameObject.direction === DIRECTION.UP
+    ) {
       this._gameObject.setX(targetEnemy.x);
     } else {
       this._gameObject.setY(targetEnemy.y);

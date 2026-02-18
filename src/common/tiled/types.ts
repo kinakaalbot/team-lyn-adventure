@@ -1,5 +1,5 @@
-import { Direction } from '../types';
-import { CHEST_REWARD, DOOR_TYPE, SWITCH_ACTION, SWITCH_TEXTURE, TRAP_TYPE } from './common';
+import { Direction } from "../types";
+import { CHEST_REWARD, DOOR_TYPE, SWITCH_ACTION, SWITCH_TEXTURE, TRAP_TYPE } from "./common";
 
 export type TiledObject = {
   x: number;
@@ -54,7 +54,7 @@ export type TiledEnemyObject = {
 } & TiledObject;
 
 export const TILED_ENEMY_OBJECT_PROPERTY = {
-  TYPE: 'type',
+  TYPE: "type",
 } as const;
 
 export type TiledSwitchObject = {

@@ -1,24 +1,24 @@
-import * as Phaser from 'phaser';
-import { SCENE_KEYS } from './scene-keys';
-import { ASSET_KEYS, CHEST_REWARD_TO_TEXTURE_FRAME } from '../common/assets';
-import { Player } from '../game-objects/player/player';
-import { KeyboardComponent } from '../components/input/keyboard-component';
-import { Spider } from '../game-objects/enemies/spider';
-import { Wisp } from '../game-objects/enemies/wisp';
-import { CharacterGameObject } from '../game-objects/common/character-game-object';
-import { CHEST_REWARD_TO_DIALOG_MAP, DIRECTION } from '../common/common';
-import * as CONFIG from '../common/config';
-import { Pot } from '../game-objects/objects/pot';
-import { Chest } from '../game-objects/objects/chest';
-import { GameObject, LevelData } from '../common/types';
-import { CUSTOM_EVENTS, EVENT_BUS } from '../common/event-bus';
+import * as Phaser from "phaser";
+import { SCENE_KEYS } from "./scene-keys";
+import { ASSET_KEYS, CHEST_REWARD_TO_TEXTURE_FRAME } from "../common/assets";
+import { Player } from "../game-objects/player/player";
+import { KeyboardComponent } from "../components/input/keyboard-component";
+import { Spider } from "../game-objects/enemies/spider";
+import { Wisp } from "../game-objects/enemies/wisp";
+import { CharacterGameObject } from "../game-objects/common/character-game-object";
+import { CHEST_REWARD_TO_DIALOG_MAP, DIRECTION } from "../common/common";
+import * as CONFIG from "../common/config";
+import { Pot } from "../game-objects/objects/pot";
+import { Chest } from "../game-objects/objects/chest";
+import { GameObject, LevelData } from "../common/types";
+import { CUSTOM_EVENTS, EVENT_BUS } from "../common/event-bus";
 import {
   exhaustiveGuard,
   getDirectionOfObjectFromAnotherObject,
   isArcadePhysicsBody,
   isLevelName,
-} from '../common/utils';
-import { TiledRoomObject } from '../common/tiled/types';
+} from "../common/utils";
+import { TiledRoomObject } from "../common/tiled/types";
 import {
   CHEST_REWARD,
   DOOR_TYPE,
@@ -26,7 +26,7 @@ import {
   TILED_LAYER_NAMES,
   TILED_TILESET_NAMES,
   TRAP_TYPE,
-} from '../common/tiled/common';
+} from "../common/tiled/common";
 import {
   getAllLayerNamesWithPrefix,
   getTiledChestObjectsFromMap,
@@ -35,14 +35,14 @@ import {
   getTiledPotObjectsFromMap,
   getTiledRoomObjectsFromMap,
   getTiledSwitchObjectsFromMap,
-} from '../common/tiled/tiled-utils';
-import { Door } from '../game-objects/objects/door';
-import { Button } from '../game-objects/objects/button';
-import { InventoryManager } from '../components/inventory/inventory-manager';
-import { CHARACTER_STATES } from '../components/state-machine/states/character/character-states';
-import { WeaponComponent } from '../components/game-object/weapon-component';
-import { DataManager } from '../common/data-manager';
-import { Drow } from '../game-objects/enemies/boss/drow';
+} from "../common/tiled/tiled-utils";
+import { Door } from "../game-objects/objects/door";
+import { Button } from "../game-objects/objects/button";
+import { InventoryManager } from "../components/inventory/inventory-manager";
+import { CHARACTER_STATES } from "../components/state-machine/states/character/character-states";
+import { WeaponComponent } from "../components/game-object/weapon-component";
+import { DataManager } from "../common/data-manager";
+import { Drow } from "../game-objects/enemies/boss/drow";
 
 export class GameScene extends Phaser.Scene {
   #levelData!: LevelData;
@@ -86,21 +86,24 @@ export class GameScene extends Phaser.Scene {
 
   public create(): void {
     if (!this.input.keyboard) {
-      console.warn('Phaser keyboard plugin is not setup properly.');
+      console.warn("Phaser keyboard plugin is not setup properly.");
       return;
     }
     this.#controls = new KeyboardComponent(this.input.keyboard);
 
     this.#createLevel();
     if (this.#collisionLayer === undefined || this.#enemyCollisionLayer === undefined) {
-      console.warn('Missing required collision layers for game.');
+      console.warn("Missing required collision layers for game.");
       return;
     }
 
     this.#showObjectsInRoomById(this.#levelData.roomId);
     this.#setupPlayer();
     this.#setupCamera();
-    this.#rewardItem = this.add.image(0, 0, ASSET_KEYS.UI_ICONS, 0).setVisible(false).setOrigin(0, 1);
+    this.#rewardItem = this.add
+      .image(0, 0, ASSET_KEYS.UI_ICONS, 0)
+      .setVisible(false)
+      .setOrigin(0, 1);
 
     this.#registerColliders();
     this.#registerCustomEvents();
@@ -168,7 +171,10 @@ export class GameScene extends Phaser.Scene {
 
       if (this.#objectsByRoomId[roomId].enemyGroup !== undefined) {
         // collide with walls, doors, etc
-        this.physics.add.collider(this.#objectsByRoomId[roomId].enemyGroup, this.#enemyCollisionLayer);
+        this.physics.add.collider(
+          this.#objectsByRoomId[roomId].enemyGroup,
+          this.#enemyCollisionLayer,
+        );
 
         // register collisions between player and enemies
         this.physics.add.overlap(this.#player, this.#objectsByRoomId[roomId].enemyGroup, () => {
@@ -212,22 +218,31 @@ export class GameScene extends Phaser.Scene {
           this.#objectsByRoomId[roomId].enemyGroup,
           this.#player.weaponComponent.body,
           (enemy) => {
-            (enemy as CharacterGameObject).hit(this.#player.direction, this.#player.weaponComponent.weaponDamage);
+            (enemy as CharacterGameObject).hit(
+              this.#player.direction,
+              this.#player.weaponComponent.weaponDamage,
+            );
           },
         );
 
         // register collisions between enemy weapon and player
-        const enemyWeapons = this.#objectsByRoomId[roomId].enemyGroup.getChildren().flatMap((enemy) => {
-          const weaponComponent = WeaponComponent.getComponent<WeaponComponent>(enemy as GameObject);
-          if (weaponComponent !== undefined) {
-            return [weaponComponent.body];
-          }
-          return [];
-        });
+        const enemyWeapons = this.#objectsByRoomId[roomId].enemyGroup
+          .getChildren()
+          .flatMap((enemy) => {
+            const weaponComponent = WeaponComponent.getComponent<WeaponComponent>(
+              enemy as GameObject,
+            );
+            if (weaponComponent !== undefined) {
+              return [weaponComponent.body];
+            }
+            return [];
+          });
         if (enemyWeapons.length > 0) {
           this.physics.add.overlap(enemyWeapons, this.#player, (enemyWeaponBody) => {
             // get associated weapon component so we can do things like hide projectiles and disable collisions
-            const weaponComponent = WeaponComponent.getComponent<WeaponComponent>(enemyWeaponBody as GameObject);
+            const weaponComponent = WeaponComponent.getComponent<WeaponComponent>(
+              enemyWeaponBody as GameObject,
+            );
             if (weaponComponent === undefined || weaponComponent.weapon === undefined) {
               return;
             }
@@ -239,19 +254,27 @@ export class GameScene extends Phaser.Scene {
 
       // handle collisions between thrown pots and other objects in the current room
       if (this.#objectsByRoomId[roomId].pots.length > 0) {
-        this.physics.add.collider(this.#objectsByRoomId[roomId].pots, this.#blockingGroup, (pot) => {
-          if (!(pot instanceof Pot)) {
-            return;
-          }
-          pot.break();
-        });
+        this.physics.add.collider(
+          this.#objectsByRoomId[roomId].pots,
+          this.#blockingGroup,
+          (pot) => {
+            if (!(pot instanceof Pot)) {
+              return;
+            }
+            pot.break();
+          },
+        );
         // collisions between pots and collision layer
-        this.physics.add.collider(this.#objectsByRoomId[roomId].pots, this.#collisionLayer, (pot) => {
-          if (!(pot instanceof Pot)) {
-            return;
-          }
-          pot.break();
-        });
+        this.physics.add.collider(
+          this.#objectsByRoomId[roomId].pots,
+          this.#collisionLayer,
+          (pot) => {
+            if (!(pot instanceof Pot)) {
+              return;
+            }
+            pot.break();
+          },
+        );
       }
     });
   }
@@ -302,7 +325,10 @@ export class GameScene extends Phaser.Scene {
     // create main background
     this.add.image(0, 0, ASSET_KEYS[`${this.#levelData.level}_BACKGROUND`], 0).setOrigin(0);
     // create main foreground
-    this.add.image(0, 0, ASSET_KEYS[`${this.#levelData.level}_FOREGROUND`], 0).setOrigin(0).setDepth(2);
+    this.add
+      .image(0, 0, ASSET_KEYS[`${this.#levelData.level}_FOREGROUND`], 0)
+      .setOrigin(0)
+      .setDepth(2);
 
     // create tilemap from Tiled json data
     const map = this.make.tilemap({
@@ -325,7 +351,12 @@ export class GameScene extends Phaser.Scene {
     this.#collisionLayer = collisionLayer;
     this.#collisionLayer.setDepth(2).setAlpha(CONFIG.DEBUG_COLLISION_ALPHA);
 
-    const enemyCollisionLayer = map.createLayer(TILED_LAYER_NAMES.ENEMY_COLLISION, collisionTiles, 0, 0);
+    const enemyCollisionLayer = map.createLayer(
+      TILED_LAYER_NAMES.ENEMY_COLLISION,
+      collisionTiles,
+      0,
+      0,
+    );
     if (enemyCollisionLayer === null) {
       console.log(`encountered error while creating enemy collision layer using data from tiled`);
       return;
@@ -343,17 +374,29 @@ export class GameScene extends Phaser.Scene {
     // create game objects
     this.#createRooms(map, TILED_LAYER_NAMES.ROOMS);
 
-    const rooms = getAllLayerNamesWithPrefix(map, TILED_LAYER_NAMES.ROOMS).map((layerName: string) => {
-      return {
-        name: layerName,
-        roomId: parseInt(layerName.split('/')[1], 10),
-      };
-    });
-    const switchLayerNames = rooms.filter((layer) => layer.name.endsWith(`/${TILED_LAYER_NAMES.SWITCHES}`));
-    const potLayerNames = rooms.filter((layer) => layer.name.endsWith(`/${TILED_LAYER_NAMES.POTS}`));
-    const doorLayerNames = rooms.filter((layer) => layer.name.endsWith(`/${TILED_LAYER_NAMES.DOORS}`));
-    const chestLayerNames = rooms.filter((layer) => layer.name.endsWith(`/${TILED_LAYER_NAMES.CHESTS}`));
-    const enemyLayerNames = rooms.filter((layer) => layer.name.endsWith(`/${TILED_LAYER_NAMES.ENEMIES}`));
+    const rooms = getAllLayerNamesWithPrefix(map, TILED_LAYER_NAMES.ROOMS).map(
+      (layerName: string) => {
+        return {
+          name: layerName,
+          roomId: parseInt(layerName.split("/")[1], 10),
+        };
+      },
+    );
+    const switchLayerNames = rooms.filter((layer) =>
+      layer.name.endsWith(`/${TILED_LAYER_NAMES.SWITCHES}`),
+    );
+    const potLayerNames = rooms.filter((layer) =>
+      layer.name.endsWith(`/${TILED_LAYER_NAMES.POTS}`),
+    );
+    const doorLayerNames = rooms.filter((layer) =>
+      layer.name.endsWith(`/${TILED_LAYER_NAMES.DOORS}`),
+    );
+    const chestLayerNames = rooms.filter((layer) =>
+      layer.name.endsWith(`/${TILED_LAYER_NAMES.CHESTS}`),
+    );
+    const enemyLayerNames = rooms.filter((layer) =>
+      layer.name.endsWith(`/${TILED_LAYER_NAMES.ENEMIES}`),
+    );
 
     doorLayerNames.forEach((layer) => this.#createDoors(map, layer.name, layer.roomId));
     switchLayerNames.forEach((layer) => this.#createButtons(map, layer.name, layer.roomId));
@@ -365,12 +408,18 @@ export class GameScene extends Phaser.Scene {
   #setupCamera(): void {
     // updates for camera to stay with level
     const roomSize = this.#objectsByRoomId[this.#levelData.roomId].room;
-    this.cameras.main.setBounds(roomSize.x, roomSize.y - roomSize.height, roomSize.width, roomSize.height);
+    this.cameras.main.setBounds(
+      roomSize.x,
+      roomSize.y - roomSize.height,
+      roomSize.width,
+      roomSize.height,
+    );
     this.cameras.main.startFollow(this.#player);
   }
 
   #setupPlayer(): void {
-    const startingDoor = this.#objectsByRoomId[this.#levelData.roomId].doorMap[this.#levelData.doorId];
+    const startingDoor =
+      this.#objectsByRoomId[this.#levelData.roomId].doorMap[this.#levelData.doorId];
     const playerStartPosition = {
       x: startingDoor.x + startingDoor.doorTransitionZone.width / 2,
       y: startingDoor.y - startingDoor.doorTransitionZone.height / 2,
@@ -439,7 +488,8 @@ export class GameScene extends Phaser.Scene {
 
       // update door details based on data in data manager
       const existingDoorData =
-        DataManager.instance.data.areaDetails[DataManager.instance.data.currentArea.name][roomId]?.doors[tileObject.id];
+        DataManager.instance.data.areaDetails[DataManager.instance.data.currentArea.name][roomId]
+          ?.doors[tileObject.id];
       if (existingDoorData !== undefined && existingDoorData.unlocked) {
         door.open();
         return;
@@ -493,9 +543,8 @@ export class GameScene extends Phaser.Scene {
 
       // update chest details based on data in data manager
       const existingChestData =
-        DataManager.instance.data.areaDetails[DataManager.instance.data.currentArea.name][roomId]?.chests[
-          tiledObject.id
-        ];
+        DataManager.instance.data.areaDetails[DataManager.instance.data.currentArea.name][roomId]
+          ?.chests[tiledObject.id];
       if (existingChestData !== undefined) {
         if (existingChestData.revealed) {
           chest.reveal();
@@ -522,7 +571,10 @@ export class GameScene extends Phaser.Scene {
         continue;
       }
       if (tiledObject.type === 1) {
-        const spider = new Spider({ scene: this, position: { x: tiledObject.x, y: tiledObject.y } });
+        const spider = new Spider({
+          scene: this,
+          position: { x: tiledObject.x, y: tiledObject.y },
+        });
         this.#objectsByRoomId[roomId].enemyGroup.add(spider);
         continue;
       }
@@ -533,7 +585,8 @@ export class GameScene extends Phaser.Scene {
       }
       if (
         tiledObject.type === 3 &&
-        !DataManager.instance.data.areaDetails[DataManager.instance.data.currentArea.name].bossDefeated
+        !DataManager.instance.data.areaDetails[DataManager.instance.data.currentArea.name]
+          .bossDefeated
       ) {
         const drow = new Drow({ scene: this, position: { x: tiledObject.x, y: tiledObject.y } });
         this.#objectsByRoomId[roomId].enemyGroup.add(drow);
@@ -657,13 +710,18 @@ export class GameScene extends Phaser.Scene {
 
   #handleButtonPress(button: Button): void {
     const buttonPressedData = button.press();
-    if (buttonPressedData.targetIds.length === 0 || buttonPressedData.action === SWITCH_ACTION.NOTHING) {
+    if (
+      buttonPressedData.targetIds.length === 0 ||
+      buttonPressedData.action === SWITCH_ACTION.NOTHING
+    ) {
       return;
     }
     switch (buttonPressedData.action) {
       case SWITCH_ACTION.OPEN_DOOR:
         // for each door id in the target list, we need to trigger opening the door
-        buttonPressedData.targetIds.forEach((id) => this.#objectsByRoomId[this.#currentRoomId].doorMap[id].open());
+        buttonPressedData.targetIds.forEach((id) =>
+          this.#objectsByRoomId[this.#currentRoomId].doorMap[id].open(),
+        );
         break;
       case SWITCH_ACTION.REVEAL_CHEST:
         // for each chest id in the target list, we need to trigger revealing the chest
@@ -671,8 +729,9 @@ export class GameScene extends Phaser.Scene {
           this.#objectsByRoomId[this.#currentRoomId].chestMap[id].reveal();
           // update data manager so we can persist chest state
           const existingChestData =
-            DataManager.instance.data.areaDetails[DataManager.instance.data.currentArea.name][this.#currentRoomId]
-              ?.chests[id];
+            DataManager.instance.data.areaDetails[DataManager.instance.data.currentArea.name][
+              this.#currentRoomId
+            ]?.chests[id];
           if (!existingChestData || !existingChestData.revealed) {
             DataManager.instance.updateChestData(this.#currentRoomId, id, true, false);
           }
@@ -712,8 +771,9 @@ export class GameScene extends Phaser.Scene {
         chest.reveal();
         // update data manager so we can persist chest state
         const existingChestData =
-          DataManager.instance.data.areaDetails[DataManager.instance.data.currentArea.name][this.#currentRoomId]
-            ?.chests[chest.id];
+          DataManager.instance.data.areaDetails[DataManager.instance.data.currentArea.name][
+            this.#currentRoomId
+          ]?.chests[chest.id];
         if (!existingChestData || !existingChestData.revealed) {
           DataManager.instance.updateChestData(this.#currentRoomId, chest.id, true, false);
         }
@@ -725,7 +785,8 @@ export class GameScene extends Phaser.Scene {
       }
       if (
         door.trapDoorTrigger === TRAP_TYPE.BOSS_DEFEATED &&
-        DataManager.instance.data.areaDetails[DataManager.instance.data.currentArea.name].bossDefeated
+        DataManager.instance.data.areaDetails[DataManager.instance.data.currentArea.name]
+          .bossDefeated
       ) {
         door.open();
       }

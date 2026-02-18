@@ -1,10 +1,10 @@
-import { CharacterGameObject } from '../../../../game-objects/common/character-game-object';
-import { CHARACTER_ANIMATIONS } from '../../../../common/assets';
-import { BaseCharacterState } from './base-character-state';
-import { CHARACTER_STATES } from './character-states';
-import { HeldGameObjectComponent } from '../../../game-object/held-game-object-component';
-import { ThrowableObjectComponent } from '../../../game-object/throwable-object-component';
-import { CUSTOM_EVENTS, EVENT_BUS } from '../../../../common/event-bus';
+import { CharacterGameObject } from "../../../../game-objects/common/character-game-object";
+import { CHARACTER_ANIMATIONS } from "../../../../common/assets";
+import { BaseCharacterState } from "./base-character-state";
+import { CHARACTER_STATES } from "./character-states";
+import { HeldGameObjectComponent } from "../../../game-object/held-game-object-component";
+import { ThrowableObjectComponent } from "../../../game-object/throwable-object-component";
+import { CUSTOM_EVENTS, EVENT_BUS } from "../../../../common/event-bus";
 
 export class DeathState extends BaseCharacterState {
   #onDieCallback: () => void;
@@ -19,7 +19,9 @@ export class DeathState extends BaseCharacterState {
     this._resetObjectVelocity();
 
     // drop held object
-    const heldComponent = HeldGameObjectComponent.getComponent<HeldGameObjectComponent>(this._gameObject);
+    const heldComponent = HeldGameObjectComponent.getComponent<HeldGameObjectComponent>(
+      this._gameObject,
+    );
     if (heldComponent !== undefined && heldComponent.object !== undefined) {
       const throwObjectComponent = ThrowableObjectComponent.getComponent<ThrowableObjectComponent>(
         heldComponent.object,

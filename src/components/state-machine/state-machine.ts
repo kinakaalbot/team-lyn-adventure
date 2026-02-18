@@ -1,4 +1,4 @@
-import { ENABLE_LOGGING } from '../../common/config';
+import { ENABLE_LOGGING } from "../../common/config";
 
 export interface State {
   stateMachine: StateMachine;
@@ -57,10 +57,12 @@ export class StateMachine {
    * @returns {void}
    */
   public setState(name: string, ...args: unknown[]): void {
-    const methodName = 'setState';
+    const methodName = "setState";
 
     if (!this.#states.has(name)) {
-      console.warn(`[${StateMachine.name}-${this.#id}:${methodName}] tried to change to unknown state: ${name}`);
+      console.warn(
+        `[${StateMachine.name}-${this.#id}:${methodName}] tried to change to unknown state: ${name}`,
+      );
       return;
     }
 
@@ -74,7 +76,7 @@ export class StateMachine {
     }
 
     this.#isChangingState = true;
-    this.#log(methodName, `change from ${this.#currentState?.name ?? 'none'} to ${name}`);
+    this.#log(methodName, `change from ${this.#currentState?.name ?? "none"} to ${name}`);
 
     this.#currentState = this.#states.get(name) as State;
 

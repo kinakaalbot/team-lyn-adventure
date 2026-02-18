@@ -1,18 +1,18 @@
-import * as Phaser from 'phaser';
-import { Position } from '../../common/types';
-import { InputComponent } from '../../components/input/input-component';
-import { CHARACTER_STATES } from '../../components/state-machine/states/character/character-states';
+import * as Phaser from "phaser";
+import { Position } from "../../common/types";
+import { InputComponent } from "../../components/input/input-component";
+import { CHARACTER_STATES } from "../../components/state-machine/states/character/character-states";
 import {
   ENEMY_WISP_MAX_HEALTH,
   ENEMY_WISP_PULSE_ANIMATION_DURATION,
   ENEMY_WISP_PULSE_ANIMATION_SCALE_X,
   ENEMY_WISP_PULSE_ANIMATION_SCALE_Y,
   ENEMY_WISP_SPEED,
-} from '../../common/config';
-import { AnimationConfig } from '../../components/game-object/animation-component';
-import { ASSET_KEYS, WISP_ANIMATION_KEYS } from '../../common/assets';
-import { CharacterGameObject } from '../common/character-game-object';
-import { BounceMoveState } from '../../components/state-machine/states/character/bounce-move-state';
+} from "../../common/config";
+import { AnimationConfig } from "../../components/game-object/animation-component";
+import { ASSET_KEYS, WISP_ANIMATION_KEYS } from "../../common/assets";
+import { CharacterGameObject } from "../common/character-game-object";
+import { BounceMoveState } from "../../components/state-machine/states/character/bounce-move-state";
 
 export type WispConfig = {
   scene: Phaser.Scene;

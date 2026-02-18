@@ -1,15 +1,15 @@
-import { INTERACTIVE_OBJECT_TYPE } from '../../../../common/common';
-import { CHARACTER_STATES } from './character-states';
-import { exhaustiveGuard } from '../../../../common/utils';
-import { CharacterGameObject } from '../../../../game-objects/common/character-game-object';
-import { CollidingObjectsComponent } from '../../../game-object/colliding-objects-component';
-import { InteractiveObjectComponent } from '../../../game-object/interactive-object-component';
-import { InputComponent } from '../../../input/input-component';
-import { BaseMoveState } from './base-move-state';
+import { INTERACTIVE_OBJECT_TYPE } from "../../../../common/common";
+import { CHARACTER_STATES } from "./character-states";
+import { exhaustiveGuard } from "../../../../common/utils";
+import { CharacterGameObject } from "../../../../game-objects/common/character-game-object";
+import { CollidingObjectsComponent } from "../../../game-object/colliding-objects-component";
+import { InteractiveObjectComponent } from "../../../game-object/interactive-object-component";
+import { InputComponent } from "../../../input/input-component";
+import { BaseMoveState } from "./base-move-state";
 
 export class MoveState extends BaseMoveState {
   constructor(gameObject: CharacterGameObject) {
-    super(CHARACTER_STATES.MOVE_STATE, gameObject, 'WALK');
+    super(CHARACTER_STATES.MOVE_STATE, gameObject, "WALK");
   }
 
   public onUpdate(): void {
@@ -37,7 +37,9 @@ export class MoveState extends BaseMoveState {
   }
 
   #checkIfObjectWasInteractedWith(controls: InputComponent): boolean {
-    const collideComponent = CollidingObjectsComponent.getComponent<CollidingObjectsComponent>(this._gameObject);
+    const collideComponent = CollidingObjectsComponent.getComponent<CollidingObjectsComponent>(
+      this._gameObject,
+    );
     if (collideComponent === undefined || collideComponent.objects.length === 0) {
       return false;
     }

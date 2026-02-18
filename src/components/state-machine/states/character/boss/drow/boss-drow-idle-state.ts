@@ -1,7 +1,7 @@
-import { CharacterGameObject } from '../../../../../../game-objects/common/character-game-object';
-import { BaseCharacterState } from '../../base-character-state';
-import { CHARACTER_STATES } from '../../character-states';
-import { ENEMY_BOSS_IDLE_STATE_DURATION } from '../../../../../../common/config';
+import { CharacterGameObject } from "../../../../../../game-objects/common/character-game-object";
+import { BaseCharacterState } from "../../base-character-state";
+import { CHARACTER_STATES } from "../../character-states";
+import { ENEMY_BOSS_IDLE_STATE_DURATION } from "../../../../../../common/config";
 
 export class BossDrowIdleState extends BaseCharacterState {
   constructor(gameObject: CharacterGameObject) {

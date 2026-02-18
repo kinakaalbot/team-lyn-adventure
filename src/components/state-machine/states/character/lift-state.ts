@@ -1,15 +1,15 @@
-import * as Phaser from 'phaser';
-import { BaseCharacterState } from './base-character-state';
-import { CHARACTER_STATES } from './character-states';
-import { CharacterGameObject } from '../../../../game-objects/common/character-game-object';
-import { isArcadePhysicsBody } from '../../../../common/utils';
-import { HeldGameObjectComponent } from '../../../game-object/held-game-object-component';
-import { GameObject } from '../../../../common/types';
+import * as Phaser from "phaser";
+import { BaseCharacterState } from "./base-character-state";
+import { CHARACTER_STATES } from "./character-states";
+import { CharacterGameObject } from "../../../../game-objects/common/character-game-object";
+import { isArcadePhysicsBody } from "../../../../common/utils";
+import { HeldGameObjectComponent } from "../../../game-object/held-game-object-component";
+import { GameObject } from "../../../../common/types";
 import {
   LIFT_ITEM_ANIMATION_DELAY,
   LIFT_ITEM_ANIMATION_DURATION,
   LIFT_ITEM_ANIMATION_ENABLE_DEBUGGING,
-} from '../../../../common/config';
+} from "../../../../common/config";
 
 export class LiftState extends BaseCharacterState {
   constructor(gameObject: CharacterGameObject) {
@@ -22,7 +22,9 @@ export class LiftState extends BaseCharacterState {
     // reset game object velocity
     this._resetObjectVelocity();
 
-    const heldComponent = HeldGameObjectComponent.getComponent<HeldGameObjectComponent>(this._gameObject);
+    const heldComponent = HeldGameObjectComponent.getComponent<HeldGameObjectComponent>(
+      this._gameObject,
+    );
     if (heldComponent === undefined) {
       this._stateMachine.setState(CHARACTER_STATES.IDLE_STATE);
       return;
@@ -42,9 +44,18 @@ export class LiftState extends BaseCharacterState {
     // have character carry the object
     gameObjectBeingPickedUp.setDepth(2).setOrigin(0.5, 0.5);
     // create curved path for ball to follow
-    const startPoint = new Phaser.Math.Vector2(gameObjectBeingPickedUp.x + 8, gameObjectBeingPickedUp.y - 8);
-    const controlPoint1 = new Phaser.Math.Vector2(gameObjectBeingPickedUp.x + 8, gameObjectBeingPickedUp.y - 24);
-    const controlPoint2 = new Phaser.Math.Vector2(gameObjectBeingPickedUp.x + 8, gameObjectBeingPickedUp.y - 24);
+    const startPoint = new Phaser.Math.Vector2(
+      gameObjectBeingPickedUp.x + 8,
+      gameObjectBeingPickedUp.y - 8,
+    );
+    const controlPoint1 = new Phaser.Math.Vector2(
+      gameObjectBeingPickedUp.x + 8,
+      gameObjectBeingPickedUp.y - 24,
+    );
+    const controlPoint2 = new Phaser.Math.Vector2(
+      gameObjectBeingPickedUp.x + 8,
+      gameObjectBeingPickedUp.y - 24,
+    );
     const endPoint = new Phaser.Math.Vector2(this._gameObject.x, this._gameObject.y - 8);
     const curve = new Phaser.Curves.CubicBezier(startPoint, controlPoint1, controlPoint2, endPoint);
     const curvePath = new Phaser.Curves.Path(startPoint.x, startPoint.y).add(curve);

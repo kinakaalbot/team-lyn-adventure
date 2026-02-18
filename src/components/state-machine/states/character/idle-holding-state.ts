@@ -1,6 +1,6 @@
-import { CharacterGameObject } from '../../../../game-objects/common/character-game-object';
-import { BaseCharacterState } from './base-character-state';
-import { CHARACTER_STATES } from './character-states';
+import { CharacterGameObject } from "../../../../game-objects/common/character-game-object";
+import { BaseCharacterState } from "./base-character-state";
+import { CHARACTER_STATES } from "./character-states";
 
 export class IdleHoldingState extends BaseCharacterState {
   constructor(gameObject: CharacterGameObject) {
@@ -25,7 +25,12 @@ export class IdleHoldingState extends BaseCharacterState {
     }
 
     // if no other input is provided, do nothing
-    if (!controls.isDownDown && !controls.isUpDown && !controls.isLeftDown && !controls.isRightDown) {
+    if (
+      !controls.isDownDown &&
+      !controls.isUpDown &&
+      !controls.isLeftDown &&
+      !controls.isRightDown
+    ) {
       return;
     }
 

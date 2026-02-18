@@ -1,8 +1,8 @@
-import { BaseCharacterState } from './base-character-state';
-import { CHARACTER_STATES } from './character-states';
-import { CharacterGameObject } from '../../../../game-objects/common/character-game-object';
-import { Chest } from '../../../../game-objects/objects/chest';
-import { CUSTOM_EVENTS, EVENT_BUS } from '../../../../common/event-bus';
+import { BaseCharacterState } from "./base-character-state";
+import { CHARACTER_STATES } from "./character-states";
+import { CharacterGameObject } from "../../../../game-objects/common/character-game-object";
+import { Chest } from "../../../../game-objects/objects/chest";
+import { CUSTOM_EVENTS, EVENT_BUS } from "../../../../common/event-bus";
 
 export class OpenChestState extends BaseCharacterState {
   constructor(gameObject: CharacterGameObject) {

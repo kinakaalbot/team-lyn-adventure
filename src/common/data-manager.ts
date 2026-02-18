@@ -1,13 +1,13 @@
-import { LEVEL_NAME } from './common';
-import { PLAYER_START_MAX_HEALTH } from './config';
+import { LEVEL_NAME } from "./common";
+import { PLAYER_START_MAX_HEALTH } from "./config";
 import {
   CUSTOM_EVENTS,
   EVENT_BUS,
   PLAYER_HEALTH_UPDATE_TYPE,
   PlayerHealthUpdated,
   PlayerHealthUpdateType,
-} from './event-bus';
-import { LevelName } from './types';
+} from "./event-bus";
+import { LevelName } from "./types";
 
 export type PlayerData = {
   currentHealth: number;
@@ -83,7 +83,12 @@ export class DataManager {
     };
   }
 
-  public updateChestData(roomId: number, chestId: number, revealed: boolean, opened: boolean): void {
+  public updateChestData(
+    roomId: number,
+    chestId: number,
+    revealed: boolean,
+    opened: boolean,
+  ): void {
     this.#populateDefaultRoomData(roomId);
     this.#data.areaDetails[this.#data.currentArea.name][roomId].chests[chestId] = {
       revealed,

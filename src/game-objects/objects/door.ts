@@ -1,9 +1,9 @@
-import { ASSET_KEYS, DOOR_FRAME_KEYS } from '../../common/assets';
-import { DIRECTION } from '../../common/common';
-import { ENABLE_DEBUG_ZONE_AREA } from '../../common/config';
-import { DOOR_TYPE } from '../../common/tiled/common';
-import { DoorType, TiledDoorObject, TrapType } from '../../common/tiled/types';
-import { CustomGameObject, Direction } from '../../common/types';
+import { ASSET_KEYS, DOOR_FRAME_KEYS } from "../../common/assets";
+import { DIRECTION } from "../../common/common";
+import { ENABLE_DEBUG_ZONE_AREA } from "../../common/config";
+import { DOOR_TYPE } from "../../common/tiled/common";
+import { DoorType, TiledDoorObject, TrapType } from "../../common/tiled/types";
+import { CustomGameObject, Direction } from "../../common/types";
 
 export class Door implements CustomGameObject {
   #scene: Phaser.Scene;

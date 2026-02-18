@@ -1,7 +1,7 @@
-import { BaseWeapon, WeaponAttackAnimationConfig } from './base-weapon';
-import { DIRECTION } from '../../common/common';
-import { WeaponComponent } from '../../components/game-object/weapon-component';
-import { ASSET_KEYS } from '../../common/assets';
+import { BaseWeapon, WeaponAttackAnimationConfig } from "./base-weapon";
+import { DIRECTION } from "../../common/common";
+import { WeaponComponent } from "../../components/game-object/weapon-component";
+import { ASSET_KEYS } from "../../common/assets";
 
 export class Dagger extends BaseWeapon {
   #weaponSprite: Phaser.GameObjects.Sprite;
@@ -74,7 +74,10 @@ export class Dagger extends BaseWeapon {
   }
 
   public update(): void {
-    this.#weaponSprite.setPosition(this._weaponComponent.body.position.x, this._weaponComponent.body.position.y);
+    this.#weaponSprite.setPosition(
+      this._weaponComponent.body.position.x,
+      this._weaponComponent.body.position.y,
+    );
   }
 
   protected attackAnimationCompleteHandler(): void {

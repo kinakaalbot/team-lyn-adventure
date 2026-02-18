@@ -1,5 +1,5 @@
-import * as Phaser from 'phaser';
-import { ASSET_KEYS, DROW_ANIMATION_KEYS } from '../../../common/assets';
+import * as Phaser from "phaser";
+import { ASSET_KEYS, DROW_ANIMATION_KEYS } from "../../../common/assets";
 import {
   ENEMY_BOSS_DROW_SPEED,
   ENEMY_BOSS_DROW_MAX_HEALTH,
@@ -8,23 +8,23 @@ import {
   ENEMY_BOSS_START_INITIAL_DELAY,
   ENEMY_BOSS_ATTACK_DAMAGE,
   ENEMY_BOSS_ATTACK_SPEED,
-} from '../../../common/config';
-import { Position } from '../../../common/types';
-import { AnimationConfig } from '../../../components/game-object/animation-component';
-import { InputComponent } from '../../../components/input/input-component';
-import { CHARACTER_STATES } from '../../../components/state-machine/states/character/character-states';
-import { CharacterGameObject } from '../../common/character-game-object';
-import { WeaponComponent } from '../../../components/game-object/weapon-component';
-import { HurtState } from '../../../components/state-machine/states/character/hurt-state';
-import { DeathState } from '../../../components/state-machine/states/character/death-state';
-import { flash } from '../../../common/juice-utils';
-import { BossDrowHiddenState } from '../../../components/state-machine/states/character/boss/drow/boss-drow-hidden-state';
-import { BossDrowPrepareAttackState } from '../../../components/state-machine/states/character/boss/drow/boss-drow-prepare-attack-state';
-import { BossDrowTeleportState } from '../../../components/state-machine/states/character/boss/drow/boss-drow-teleport-state';
-import { AttackState } from '../../../components/state-machine/states/character/attack-state';
-import { BossDrowIdleState } from '../../../components/state-machine/states/character/boss/drow/boss-drow-idle-state';
-import { Dagger } from '../../weapons/dagger';
-import { CUSTOM_EVENTS, EVENT_BUS } from '../../../common/event-bus';
+} from "../../../common/config";
+import { Position } from "../../../common/types";
+import { AnimationConfig } from "../../../components/game-object/animation-component";
+import { InputComponent } from "../../../components/input/input-component";
+import { CHARACTER_STATES } from "../../../components/state-machine/states/character/character-states";
+import { CharacterGameObject } from "../../common/character-game-object";
+import { WeaponComponent } from "../../../components/game-object/weapon-component";
+import { HurtState } from "../../../components/state-machine/states/character/hurt-state";
+import { DeathState } from "../../../components/state-machine/states/character/death-state";
+import { flash } from "../../../common/juice-utils";
+import { BossDrowHiddenState } from "../../../components/state-machine/states/character/boss/drow/boss-drow-hidden-state";
+import { BossDrowPrepareAttackState } from "../../../components/state-machine/states/character/boss/drow/boss-drow-prepare-attack-state";
+import { BossDrowTeleportState } from "../../../components/state-machine/states/character/boss/drow/boss-drow-teleport-state";
+import { AttackState } from "../../../components/state-machine/states/character/attack-state";
+import { BossDrowIdleState } from "../../../components/state-machine/states/character/boss/drow/boss-drow-idle-state";
+import { Dagger } from "../../weapons/dagger";
+import { CUSTOM_EVENTS, EVENT_BUS } from "../../../common/event-bus";
 
 type DrowConfig = {
   scene: Phaser.Scene;
@@ -114,7 +114,9 @@ export class Drow extends CharacterGameObject {
     );
 
     this.setScale(1.25);
-    this.physicsBody.setSize(12, 24, true).setOffset(this.displayWidth / 4, this.displayHeight / 4 - 3);
+    this.physicsBody
+      .setSize(12, 24, true)
+      .setOffset(this.displayWidth / 4, this.displayHeight / 4 - 3);
   }
 
   get physicsBody(): Phaser.Physics.Arcade.Body {

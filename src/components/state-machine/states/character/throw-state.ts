@@ -1,8 +1,8 @@
-import { CharacterGameObject } from '../../../../game-objects/common/character-game-object';
-import { HeldGameObjectComponent } from '../../../game-object/held-game-object-component';
-import { ThrowableObjectComponent } from '../../../game-object/throwable-object-component';
-import { BaseCharacterState } from './base-character-state';
-import { CHARACTER_STATES } from './character-states';
+import { CharacterGameObject } from "../../../../game-objects/common/character-game-object";
+import { HeldGameObjectComponent } from "../../../game-object/held-game-object-component";
+import { ThrowableObjectComponent } from "../../../game-object/throwable-object-component";
+import { BaseCharacterState } from "./base-character-state";
+import { CHARACTER_STATES } from "./character-states";
 
 export class ThrowState extends BaseCharacterState {
   constructor(gameObject: CharacterGameObject) {
@@ -14,14 +14,20 @@ export class ThrowState extends BaseCharacterState {
     this._resetObjectVelocity();
 
     // play lift animation to throw items
-    this._gameObject.animationComponent.playAnimationInReverse(`LIFT_${this._gameObject.direction}`);
+    this._gameObject.animationComponent.playAnimationInReverse(
+      `LIFT_${this._gameObject.direction}`,
+    );
 
     // get item held by character and see if this is a throwable item
-    const heldComponent = HeldGameObjectComponent.getComponent<HeldGameObjectComponent>(this._gameObject);
+    const heldComponent = HeldGameObjectComponent.getComponent<HeldGameObjectComponent>(
+      this._gameObject,
+    );
     if (heldComponent === undefined || heldComponent.object === undefined) {
       return;
     }
-    const throwObjectComponent = ThrowableObjectComponent.getComponent<ThrowableObjectComponent>(heldComponent.object);
+    const throwObjectComponent = ThrowableObjectComponent.getComponent<ThrowableObjectComponent>(
+      heldComponent.object,
+    );
     if (throwObjectComponent !== undefined) {
       throwObjectComponent.throw(this._gameObject.direction);
     }

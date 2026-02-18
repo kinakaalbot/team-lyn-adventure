@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+import * as Phaser from "phaser";
 
 /**
  * Creates a flash animation effect by using the built in Phaser 3 Timer Events. The provided game object
@@ -7,7 +7,10 @@ import * as Phaser from 'phaser';
  * @param {() => void} [callback] The callback that will be invoked when the tween is finished
  * @returns {void}
  */
-export function flash(target: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite, callback?: () => void): void {
+export function flash(
+  target: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite,
+  callback?: () => void,
+): void {
   const timeEvent = target.scene.time.addEvent({
     delay: 250,
     callback: () => {

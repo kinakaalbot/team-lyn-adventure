@@ -1,12 +1,12 @@
-import * as Phaser from 'phaser';
-import { ASSET_KEYS, CHEST_FRAME_KEYS } from '../../common/assets';
-import { CHEST_STATE, INTERACTIVE_OBJECT_TYPE, LEVEL_NAME } from '../../common/common';
-import { ChestState, CustomGameObject } from '../../common/types';
-import { InteractiveObjectComponent } from '../../components/game-object/interactive-object-component';
-import { ChestReward, TiledChestObject, TrapType } from '../../common/tiled/types';
-import { TRAP_TYPE } from '../../common/tiled/common';
-import { InventoryManager } from '../../components/inventory/inventory-manager';
-import { DataManager } from '../../common/data-manager';
+import * as Phaser from "phaser";
+import { ASSET_KEYS, CHEST_FRAME_KEYS } from "../../common/assets";
+import { CHEST_STATE, INTERACTIVE_OBJECT_TYPE, LEVEL_NAME } from "../../common/common";
+import { ChestState, CustomGameObject } from "../../common/types";
+import { InteractiveObjectComponent } from "../../components/game-object/interactive-object-component";
+import { ChestReward, TiledChestObject, TrapType } from "../../common/tiled/types";
+import { TRAP_TYPE } from "../../common/tiled/common";
+import { InventoryManager } from "../../components/inventory/inventory-manager";
+import { DataManager } from "../../common/data-manager";
 
 export class Chest extends Phaser.Physics.Arcade.Image implements CustomGameObject {
   #state: ChestState;
@@ -16,7 +16,9 @@ export class Chest extends Phaser.Physics.Arcade.Image implements CustomGameObje
   #contents: ChestReward;
 
   constructor(scene: Phaser.Scene, config: TiledChestObject, chestState = CHEST_STATE.HIDDEN) {
-    const frameKey = config.requiresBossKey ? CHEST_FRAME_KEYS.BIG_CHEST_CLOSED : CHEST_FRAME_KEYS.SMALL_CHEST_CLOSED;
+    const frameKey = config.requiresBossKey
+      ? CHEST_FRAME_KEYS.BIG_CHEST_CLOSED
+      : CHEST_FRAME_KEYS.SMALL_CHEST_CLOSED;
     super(scene, config.x, config.y, ASSET_KEYS.DUNGEON_OBJECTS, frameKey);
 
     // add object to scene and enable phaser physics
@@ -44,7 +46,10 @@ export class Chest extends Phaser.Physics.Arcade.Image implements CustomGameObje
           return true;
         }
         // use area information from data manager
-        if (!InventoryManager.instance.getAreaInventory(DataManager.instance.data.currentArea.name).bossKey) {
+        if (
+          !InventoryManager.instance.getAreaInventory(DataManager.instance.data.currentArea.name)
+            .bossKey
+        ) {
           return false;
         }
         return true;
@@ -82,7 +87,9 @@ export class Chest extends Phaser.Physics.Arcade.Image implements CustomGameObje
     }
 
     this.#state = CHEST_STATE.OPEN;
-    const frameKey = this.#isBossKeyChest ? CHEST_FRAME_KEYS.BIG_CHEST_OPEN : CHEST_FRAME_KEYS.SMALL_CHEST_OPEN;
+    const frameKey = this.#isBossKeyChest
+      ? CHEST_FRAME_KEYS.BIG_CHEST_OPEN
+      : CHEST_FRAME_KEYS.SMALL_CHEST_OPEN;
     this.setFrame(frameKey);
 
     // after we open the chest, we can no longer interact with it

@@ -1,10 +1,10 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        entryFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: "assets/js/[name]-[hash].js",
       },
     },
   },

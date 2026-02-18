@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-![Legend of the Wispguard Logo](/docs/logo.png?raw=true 'Legend of the Wispguard Logo')
+![Legend of the Wispguard Logo](/docs/logo.png?raw=true "Legend of the Wispguard Logo")
 
 Legend of the Wispguard - Zelda-like Tutorial with [Phaser 3](https://github.com/photonstorm/phaser)!
 
@@ -12,9 +12,9 @@ This repo is the official code repository for the <a href="https://www.youtube.c
 
 You can find a playable demo of the game on Itch.io here: [Legend of the Wispguard](https://galemius.itch.io/legend-of-the-wispguard)
 
-![Game play Screenshot 1](/docs/screenshot1.png?raw=true 'Screenshot 1')
-![Game play Screenshot 2](/docs/screenshot2.png?raw=true 'Screenshot 2')
-![Game play Screenshot 3](/docs/screenshot3.png?raw=true 'Screenshot 3')
+![Game play Screenshot 1](/docs/screenshot1.png?raw=true "Screenshot 1")
+![Game play Screenshot 2](/docs/screenshot2.png?raw=true "Screenshot 2")
+![Game play Screenshot 3](/docs/screenshot3.png?raw=true "Screenshot 3")
 
 ## How To Play
 
@@ -22,13 +22,12 @@ Currently, the only supported way to play the game is with a Keyboard.
 
 ### Controls
 
-| Keys                                   | Description                                                                                           |
-| -------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Arrow Keys (Up, Down, Left, and Right) | Moves the player. Navigate menu.                                                                      |
-| Z                                      | Attack                                                                                                |
-| X                                      | Lift/Throw                                                                                            |
-| Enter                                  | Select menu option.                                                                                   |
-
+| Keys                                   | Description                      |
+| -------------------------------------- | -------------------------------- |
+| Arrow Keys (Up, Down, Left, and Right) | Moves the player. Navigate menu. |
+| Z                                      | Attack                           |
+| X                                      | Lift/Throw                       |
+| Enter                                  | Select menu option.              |
 
 ## Local Development
 
@@ -42,12 +41,12 @@ Currently, the only supported way to play the game is with a Keyboard.
 
 ### Available Commands
 
-| Command | Description |
-|---------|-------------|
-| `pnpm install --frozen-lockfile` | Install project dependencies |
-| `pnpm start` | Build project and open web server running project |
-| `pnpm build` | Builds code bundle for production |
-| `pnpm lint` | Uses ESLint to lint code |
+| Command                          | Description                                       |
+| -------------------------------- | ------------------------------------------------- |
+| `pnpm install --frozen-lockfile` | Install project dependencies                      |
+| `pnpm start`                     | Build project and open web server running project |
+| `pnpm build`                     | Builds code bundle for production                 |
+| `pnpm lint`                      | Uses ESLint to lint code                          |
 
 ### Writing Code
 
@@ -74,13 +73,13 @@ Any static assets like images or audio files should be placed in the `public` fo
 
 This project would have not been possible without the use of some awesome assets created by some amazing artists! This project would not have been possible without the following people/resources:
 
-| Asset                       | Author           | Link                                                                   |
-| --------------------------- | ---------------- | ---------------------------------------------------------------------- |
-| Press Start 2P Font         | CodeMan38        | [Google Fonts](https://fonts.google.com/specimen/Press+Start+2P)       |
-| Player                      | Foozle           | [Legend Main Character](https://foozlecc.itch.io/legend-main-character)|
-| Enemies                     | Foozle           | [Legend Enemy Pack 1](https://foozlecc.itch.io/legend-enemy-pack-1)    |
-| Dungeon Pack                | Foozle           | [Legend Spider Dungeon](https://foozlecc.itch.io/legend-spider-dungeon)|
-| UI Icons                    | Foozle           | [Legend UI Icons](https://foozlecc.itch.io/legend-ui-icons)            |
+| Asset               | Author    | Link                                                                    |
+| ------------------- | --------- | ----------------------------------------------------------------------- |
+| Press Start 2P Font | CodeMan38 | [Google Fonts](https://fonts.google.com/specimen/Press+Start+2P)        |
+| Player              | Foozle    | [Legend Main Character](https://foozlecc.itch.io/legend-main-character) |
+| Enemies             | Foozle    | [Legend Enemy Pack 1](https://foozlecc.itch.io/legend-enemy-pack-1)     |
+| Dungeon Pack        | Foozle    | [Legend Spider Dungeon](https://foozlecc.itch.io/legend-spider-dungeon) |
+| UI Icons            | Foozle    | [Legend UI Icons](https://foozlecc.itch.io/legend-ui-icons)             |
 
 ## Issues
 

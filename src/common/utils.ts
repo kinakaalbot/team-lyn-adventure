@@ -1,6 +1,6 @@
-import * as Phaser from 'phaser';
-import { DIRECTION, LEVEL_NAME } from './common';
-import { CustomGameObject, Direction, GameObject, LevelName, Position } from './types';
+import * as Phaser from "phaser";
+import { DIRECTION, LEVEL_NAME } from "./common";
+import { CustomGameObject, Direction, GameObject, LevelName, Position } from "./types";
 
 /**
  * Utility function to ensure we handle the full possible range of types when checking a variable for a possible
@@ -10,7 +10,9 @@ import { CustomGameObject, Direction, GameObject, LevelName, Position } from './
  * to ensure we check for all possible values in an enum type object.
  */
 export function exhaustiveGuard(_value: never): never {
-  throw new Error(`Error! Reached forbidden guard function with unexpected value: ${JSON.stringify(_value)}`);
+  throw new Error(
+    `Error! Reached forbidden guard function with unexpected value: ${JSON.stringify(_value)}`,
+  );
 }
 
 export function isArcadePhysicsBody(
@@ -26,11 +28,16 @@ export function isDirection(direction: string): direction is Direction {
   return DIRECTION[direction] !== undefined;
 }
 
-export function isCustomGameObject(gameObject: GameObject): gameObject is GameObject & CustomGameObject {
-  return gameObject['disableObject'] !== undefined && gameObject['enableObject'] !== undefined;
+export function isCustomGameObject(
+  gameObject: GameObject,
+): gameObject is GameObject & CustomGameObject {
+  return gameObject["disableObject"] !== undefined && gameObject["enableObject"] !== undefined;
 }
 
-export function getDirectionOfObjectFromAnotherObject(object: Position, targetObject: Position): Direction {
+export function getDirectionOfObjectFromAnotherObject(
+  object: Position,
+  targetObject: Position,
+): Direction {
   if (object.y < targetObject.y) {
     return DIRECTION.DOWN;
   }

@@ -1,16 +1,19 @@
-import * as Phaser from 'phaser';
-import { CustomGameObject, Direction, Position } from '../../common/types';
-import { InputComponent } from '../../components/input/input-component';
-import { ControlsComponent } from '../../components/game-object/controls-component';
-import { StateMachine } from '../../components/state-machine/state-machine';
-import { SpeedComponent } from '../../components/game-object/speed-component';
-import { DirectionComponent } from '../../components/game-object/direction-component';
-import { AnimationComponent, AnimationConfig } from '../../components/game-object/animation-component';
-import { InvulnerableComponent } from '../../components/game-object/invulnerable-component';
-import { CHARACTER_STATES } from '../../components/state-machine/states/character/character-states';
-import { LifeComponent } from '../../components/game-object/life-component';
-import { DataManager } from '../../common/data-manager';
-import { WeaponComponent } from '../../components/game-object/weapon-component';
+import * as Phaser from "phaser";
+import { CustomGameObject, Direction, Position } from "../../common/types";
+import { InputComponent } from "../../components/input/input-component";
+import { ControlsComponent } from "../../components/game-object/controls-component";
+import { StateMachine } from "../../components/state-machine/state-machine";
+import { SpeedComponent } from "../../components/game-object/speed-component";
+import { DirectionComponent } from "../../components/game-object/direction-component";
+import {
+  AnimationComponent,
+  AnimationConfig,
+} from "../../components/game-object/animation-component";
+import { InvulnerableComponent } from "../../components/game-object/invulnerable-component";
+import { CHARACTER_STATES } from "../../components/state-machine/states/character/character-states";
+import { LifeComponent } from "../../components/game-object/life-component";
+import { DataManager } from "../../common/data-manager";
+import { WeaponComponent } from "../../components/game-object/weapon-component";
 
 export type CharacterConfig = {
   scene: Phaser.Scene;
@@ -28,7 +31,10 @@ export type CharacterConfig = {
   currentLife?: number;
 };
 
-export abstract class CharacterGameObject extends Phaser.Physics.Arcade.Sprite implements CustomGameObject {
+export abstract class CharacterGameObject
+  extends Phaser.Physics.Arcade.Sprite
+  implements CustomGameObject
+{
   protected _controlsComponent: ControlsComponent;
   protected _speedComponent: SpeedComponent;
   protected _directionComponent: DirectionComponent;
@@ -160,7 +166,11 @@ export abstract class CharacterGameObject extends Phaser.Physics.Arcade.Sprite i
     }
 
     const weaponComponent = WeaponComponent.getComponent<WeaponComponent>(this);
-    if (weaponComponent !== undefined && weaponComponent.weapon !== undefined && weaponComponent.weapon.isAttacking) {
+    if (
+      weaponComponent !== undefined &&
+      weaponComponent.weapon !== undefined &&
+      weaponComponent.weapon.isAttacking
+    ) {
       weaponComponent.weapon.onCollisionCallback();
     }
   }

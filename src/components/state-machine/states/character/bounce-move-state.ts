@@ -1,7 +1,7 @@
-import * as Phaser from 'phaser';
-import { BaseCharacterState } from './base-character-state';
-import { CHARACTER_STATES } from './character-states';
-import { CharacterGameObject } from '../../../../game-objects/common/character-game-object';
+import * as Phaser from "phaser";
+import { BaseCharacterState } from "./base-character-state";
+import { CHARACTER_STATES } from "./character-states";
+import { CharacterGameObject } from "../../../../game-objects/common/character-game-object";
 
 export class BounceMoveState extends BaseCharacterState {
   constructor(gameObject: CharacterGameObject) {

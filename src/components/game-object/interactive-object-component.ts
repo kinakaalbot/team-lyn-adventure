@@ -1,5 +1,5 @@
-import { GameObject, InteractiveObjectType } from '../../common/types';
-import { BaseGameObjectComponent } from './base-game-object-component';
+import { GameObject, InteractiveObjectType } from "../../common/types";
+import { BaseGameObjectComponent } from "./base-game-object-component";
 
 export class InteractiveObjectComponent extends BaseGameObjectComponent {
   #objectType: InteractiveObjectType;

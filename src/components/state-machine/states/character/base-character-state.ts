@@ -1,6 +1,6 @@
-import { isArcadePhysicsBody } from '../../../../common/utils';
-import { CharacterGameObject } from '../../../../game-objects/common/character-game-object';
-import { State, StateMachine } from '../../state-machine';
+import { isArcadePhysicsBody } from "../../../../common/utils";
+import { CharacterGameObject } from "../../../../game-objects/common/character-game-object";
+import { State, StateMachine } from "../../state-machine";
 
 export abstract class BaseCharacterState implements State {
   protected _gameObject: CharacterGameObject;

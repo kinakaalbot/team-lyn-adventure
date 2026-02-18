@@ -1,5 +1,5 @@
-import { GameObject } from '../../common/types';
-import { BaseGameObjectComponent } from './base-game-object-component';
+import { GameObject } from "../../common/types";
+import { BaseGameObjectComponent } from "./base-game-object-component";
 
 export class HeldGameObjectComponent extends BaseGameObjectComponent {
   #object: GameObject | undefined;
