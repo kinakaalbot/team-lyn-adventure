@@ -15,13 +15,15 @@
     "serve": "vite preview --config config/vite.config.js",
     "lint": "oxlint ./src",
     "fmt": "oxfmt --write .",
-    "fmt:check": "oxfmt --check ."
+    "fmt:check": "oxfmt --check .",
+    "prepare": "husky"
   },
   "dependencies": {
     "phaser": "3.87.0"
   },
   "devDependencies": {
     "@devshareacademy/tsconfig": "0.0.3",
+    "husky": "^9.1.7",
     "oxfmt": "^0.33.0",
     "oxlint": "^0.10.3",
     "typescript": "5.7.3",

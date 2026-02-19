@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pnpm -s fmt
+pnpm -s lint
