@@ -10,11 +10,11 @@ export function createVirtualJoystick(scene: Phaser.Scene): VirtualJoystick | nu
   const hasTouch = scene.sys.game.device.input.touch;
   if (!hasTouch) return null;
 
-  const anyScene = scene as any;
-  const plugin = anyScene.rexVirtualJoystickPlugin;
+  // Get the global plugin by key
+  const plugin = scene.plugins.get("rexVirtualJoystick") as any;
   if (!plugin || typeof plugin.add !== "function") return null;
 
-  const joystick = plugin.add({
+  const joystick = plugin.add(scene, {
     x: 120,
     y: scene.scale.height - 120,
     radius: 60,
