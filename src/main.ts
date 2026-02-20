@@ -1,4 +1,5 @@
 import * as Phaser from "phaser";
+import VirtualJoystickPlugin from "phaser3-rex-plugins/plugins/virtualjoystick-plugin.js";
 import { SCENE_KEYS } from "./scenes/scene-keys";
 import { PreloadScene } from "./scenes/preload-scene";
 import { GameScene } from "./scenes/game-scene";
@@ -23,6 +24,15 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
       gravity: { y: 0, x: 0 },
       debug: false,
     },
+  },
+  plugins: {
+    scene: [
+      {
+        key: "rexVirtualJoystick",
+        plugin: VirtualJoystickPlugin,
+        mapping: "rexVirtualJoystickPlugin",
+      },
+    ],
   },
 };
 
