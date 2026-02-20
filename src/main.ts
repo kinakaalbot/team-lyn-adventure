@@ -8,7 +8,7 @@ import { UiScene } from "./scenes/ui-scene";
 import { GameOverScene } from "./scenes/game-over-scene";
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
-  type: Phaser.WEBGL,
+  type: Phaser.AUTO, // Use AUTO to fallback to Canvas if WebGL fails (iOS Safari)
   pixelArt: true,
   roundPixels: true,
   scale: {
@@ -27,11 +27,11 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
     },
   },
   plugins: {
-    scene: [
+    global: [
       {
         key: "rexVirtualJoystick",
         plugin: VirtualJoystickPlugin,
-        mapping: "rexVirtualJoystickPlugin",
+        start: true,
       },
     ],
   },
