@@ -1,5 +1,6 @@
 import * as Phaser from "phaser";
-import VirtualJoystickPlugin from "phaser3-rex-plugins/plugins/virtualjoystick-plugin.js";
+// Import rex virtual joystick plugin in a way that works with bundlers
+import VirtualJoystickPlugin from "phaser3-rex-plugins/plugins/virtualjoystick-plugin";
 import { SCENE_KEYS } from "./scenes/scene-keys";
 import { PreloadScene } from "./scenes/preload-scene";
 import { GameScene } from "./scenes/game-scene";
