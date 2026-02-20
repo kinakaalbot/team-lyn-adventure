@@ -1,0 +1,16 @@
+{
+  "projectId": "prj_VeNiMeVGV4fRfWPG6v6ClsxppJnF",
+  "orgId": "team_9mexnEeqDG7RhmN2K1VTDMVy",
+  "projectName": "team-lyn-adventure",
+  "settings": {
+    "createdAt": 1771577612706,
+    "framework": "vite",
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": null,
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}
